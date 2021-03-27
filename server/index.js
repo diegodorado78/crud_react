@@ -23,6 +23,63 @@ db.connect(function (error) {
     console.log("Conexion correcta.");
   }
 });
+//METODOS PARA ARTICULOS
+//create articulo
+app.post("/createArt", (req, res) => {
+  const numero_registro = req.body.numero_registro;
+    const nombre = req.body.artName;
+  const cantidad = req.body.cantidad;
+
+  db.query(
+    "INSERT INTO Articulos (numero_registro,nombre,cantidad) VAlUES(?,?,?)",
+     [numero_registro,nombre,cantidad],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("valores insertados correctamente");
+      }
+    }
+  );
+});
+//read Articulo
+app.get("/articulos", (req, res) => {
+  db.query("SELECT * FROM Articulos", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+      // res.json()
+    }
+  });
+});
+//update categoria
+app.put("/editarArt", (req, res) => {
+  const id = req.body.id;
+  const name = req.body.name;
+  db.query(
+    "UPDATE Articulos SET name = ? WHERE id = ? ",
+    [name, id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+//delete articulo
+app.delete("/eliminarArt/:id", (req, res) => {
+const id =req.params.id //accedo a la var id  de los params de mi request
+db.query("DELETE FROM Articulos WHERE id=?",id,(err,result)=>{
+ if (err) {
+   console.log(err);
+ } else {
+  res.send(result)
+ }
+})
+});
 //create categoria
 app.post("/create", (req, res) => {
   //standar sintax req y res para traer o enviar algo del server
