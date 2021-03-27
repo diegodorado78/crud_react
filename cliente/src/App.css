@@ -1,15 +1,7 @@
-.App {
-  margin: 1em auto;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  ;
+*{
+  box-sizing: border-box;
+font-family: Helvetica, sans-serif;
 }
-
-.App__form{
-display: flex;
-flex-direction: column;
-padding: 5% ;
-max-width: 100%;
+input{
+  border-radius: 5px;
 }
